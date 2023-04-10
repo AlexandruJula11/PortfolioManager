@@ -1,0 +1,78 @@
+<!--<div class="logo text-center">-->
+<!--  <img src="assets/logo.png" alt="">-->
+<!--</div>-->
+
+<div class="create-form m-3 p-4">
+  <form [formGroup]="createForm">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="username" formControlName="username">
+          <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
+          <mat-error *ngIf="createForm.controls['username'].invalid && (createForm.controls['username'].dirty || createForm.controls['username'].touched)">Username is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="title" formControlName="title">
+          <mat-icon matPrefix> title</mat-icon>
+          <mat-error *ngIf="createForm.controls['title'].invalid && (createForm.controls['title'].dirty || createForm.controls['title'].touched)">Title is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="e.g. xyz@gmail.com" formControlName="email">
+          <mat-icon matPrefix> email</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="createForm.controls['email'].invalid && (createForm.controls['email'].dirty || createForm.controls['email'].touched)">
+          <span *ngIf="createForm.controls['email'].errors?.['required']">Email is required.</span>
+          <span *ngIf="createForm.controls['email'].errors?.['email']">Invalid email format.</span>
+        </mat-error>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Customer website URL</mat-label>
+          <input matInput placeholder="e.g. www.emag.ro" formControlName="customerWebsiteURL">
+          <mat-icon matPrefix>link</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="createForm.controls['customerWebsiteURL'].invalid && (createForm.controls['customerWebsiteURL'].dirty || createForm.controls['customerWebsiteURL'].touched)">
+          <span *ngIf="createForm.controls['customerWebsiteURL'].errors?.['required']">Customer website URL is required.</span>
+          <span *ngIf="createForm.controls['customerWebsiteURL'].errors?.['pattern']">Invalid URL format.</span>
+        </mat-error>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Image URL</mat-label>
+          <input matInput placeholder="e.g. https://xyz.com/123.png" formControlName="imageURL">
+          <mat-icon matPrefix>image</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="createForm.controls['imageURL'].invalid && (createForm.controls['imageURL'].dirty || createForm.controls['imageURL'].touched)">
+          <span *ngIf="createForm.controls['imageURL'].errors?.['required']">Image URL is required.</span>
+          <span *ngIf="createForm.controls['imageURL'].errors?.['pattern']">Invalid URL format.</span>
+        </mat-error>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Visibility</mat-label>
+          <mat-select formControlName="visibilityOption">
+            <mat-option *ngFor="let option of visibilityOptions" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <button *ngIf="!isUpdateActive" (click)="onSubmit()" mat-raised-button color="warn">Add new portfolio</button>
+    <button *ngIf="isUpdateActive" (click)="onUpdate()" mat-raised-button color="warn">Update</button>
+  </form>
+</div>
